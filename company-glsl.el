@@ -140,7 +140,7 @@
 
 (defun company-glsl--candidates (arg)
   (cl-stable-sort
-   (remove-if-not
+   (cl-remove-if-not
     (lambda (c) (company-glsl--match-prefix arg c))
     (company-glsl--get-types buffer-file-name))
    'company-glsl--candidate-sorter))
