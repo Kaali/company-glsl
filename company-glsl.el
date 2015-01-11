@@ -1,4 +1,4 @@
-;;; copmany-glsl.el --- Support glsl in company-mode
+;;; company-glsl.el --- Support glsl in company-mode
 
 ;; Copyright (C) 2015 Väinö Järvelä <vaino@jarve.la>
 ;;
@@ -168,3 +168,4 @@
     (location (company-glsl--location arg))))
 
 (provide 'company-glsl)
+;;; company-glsl.el ends here
