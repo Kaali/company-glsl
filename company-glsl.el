@@ -5,6 +5,7 @@
 ;; Author: Väinö Järvelä <vaino@jarve.la>
 ;; Created: 11 January 2015
 ;; Version: 0.1
+;; Package-Version: 20210701.2007
 ;; Package-Requires: ((company "0.8.7"))
 
 ;;; License:
@@ -62,6 +63,16 @@
 (require 'company)
 (require 'cl-lib)
 
+(defgroup company-glsl nil
+  "Company back-end for GLSL code completion."
+  :group 'programming)
+
+;; (defvar company-glsl-validator-args nil)
+(defcustom company-glsl-validator-args nil
+  "Additional arguments for glslangValidator"
+  :group 'company-glsl
+  :type 'list)
+
 (defun company-glsl--is-anon (symbol)
   (string-prefix-p "anon@" symbol))
 
@@ -102,7 +113,7 @@
 
 (defun company-glsl--get-types (filename)
   (with-temp-buffer
-    (call-process "glslangValidator" nil (list (current-buffer) nil) nil "-i" filename)
+    (apply 'call-process "glslangValidator" nil (current-buffer) nil "-i" filename company-glsl-validator-args)
     (goto-char (point-min))
     (let ((vars
            (cl-reduce
