@@ -113,7 +113,8 @@
 
 (defun company-glsl--get-types (filename)
   (with-temp-buffer
-    (apply 'call-process "glslangValidator" nil (current-buffer) nil "-i" filename company-glsl-validator-args)
+    (apply 'call-process "glslangValidator" nil (current-buffer) nil
+			  "-i" filename "-o" "/dev/null" company-glsl-validator-args)
     (goto-char (point-min))
     (let ((vars
            (cl-reduce
